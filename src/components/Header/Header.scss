@@ -1,0 +1,42 @@
+.header{
+    background-color: #01384D;
+    &-container{
+        width: 1477px;
+    }
+    &-list{
+        padding: 0;
+        margin: 0;
+        padding: 18px;
+        display: flex;
+        list-style-type: none;
+    }
+    &-input{
+        width: 400px;
+        height: 40px;
+        background: #FFFFFF;
+        border-radius: 7px;
+        outline: none;
+        padding-left: 20px;
+    }
+    &-icon{
+        position: absolute;
+        margin-left: 356px;
+        margin-top: 10px;
+    }
+    &-avatar{
+        border-radius: 50%;
+        margin-left: 660px;
+        // right: 10%;
+        vertical-align: middle;
+    }
+    &-name{
+        margin-left: 25px;
+        margin-top: 10px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        color: #FFFFFF;
+    }
+}

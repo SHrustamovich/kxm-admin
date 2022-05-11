@@ -1,0 +1,13 @@
+.home{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    &-header{
+        width: 100%;
+    }
+    &-menu{
+        min-height: 100vh;
+        background-color: #01384D;
+        width: 230px;
+    }
+}

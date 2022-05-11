@@ -1,0 +1,129 @@
+.form-switch{
+    margin: 0;
+}
+.delete-btn{
+    margin-right: 8px;
+    border: none;
+    padding: 4px 6px;
+    background: #E6ECEE;
+    border-radius: 5px;
+}
+.edit-btn{
+    margin-right: 8px;
+    border: none;
+    padding: 6px 8px;
+    background: #E6ECEE;
+    border-radius: 5px;
+}
+.add-product{
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+    &-content{
+        background-color: #fff;
+        margin: auto;
+        border: 1px solid #888;
+        width: 1100px;
+        height: 440px;
+    }
+    &-title{
+        margin-top: 25px;
+        margin-left: 25px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+    }
+    &-close{
+        position: absolute;
+        margin-left: 1071px;
+        border: 1px solid #000;
+        padding: 6px 8px;
+        color: #fff;
+        background: #01384D;
+    }
+    &-one{
+        margin-left: 25px;
+    }
+    &-column{
+        display: flex;
+        margin-top: 25px;
+    }
+    &-input{
+        display: none;
+        width: 210px;
+        background-image: url(../../lib/image/man.jpg);
+    }
+    &-label{
+        border: 1px solid #ccc;
+        padding: 79px;
+        border-radius: 8px;
+    }
+    &-two{
+        margin-left: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+    &-three{
+        margin-left: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+    &-four{
+        margin-left: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+    &-switch{
+        display: flex;
+        margin-top: 25px;
+       
+    }
+}
+.add-label{
+    margin-bottom: 10px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+.add-input{
+    width: 230px;
+    height: 40px;
+    margin-bottom: 20px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-left: 8px;
+    outline: none;
+   
+}
+.add-area{
+    width: 220px;
+    height: 127px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+}
+.add-s{
+    margin-left: 65px;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
