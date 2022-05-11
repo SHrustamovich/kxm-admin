@@ -4,7 +4,7 @@ const Orders = () => {
 	const [order,setOrder] = useState([])
 	// const [isfalse,setIsfalse] = useState()
 	useEffect(() => {
-		fetch('http://localhost:5000/order')
+		fetch('https://matrasback.herokuapp.com/order')
 		.then(res => res.json())
 		.then(data => setOrder(data))
 	},[])
@@ -12,7 +12,7 @@ const Orders = () => {
 	
              const handlyChange =e => {
 
-				fetch('http://localhost:5000/updateOrder',{
+				fetch('https://matrasback.herokuapp.com/updateOrder',{
 					method:"PUT",
 					headers:{
 						'Content-Type': 'application/json'

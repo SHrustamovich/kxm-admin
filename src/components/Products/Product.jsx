@@ -11,13 +11,13 @@ const Product = () => {
 	const openModal = () => setShow(true);
 	const closeModal = () => setShow(false);
 	useEffect(() => {
-		fetch('http://localhost:5000/product')
+		fetch('https://matrasback.herokuapp.com/product')
 		.then(res => res.json())
 		.then(data => setProducts(data))
 		return ()=>{}
 	},[])
 	useEffect(() => {
-		fetch('http://localhost:5000/allCotegory')
+		fetch('https://matrasback.herokuapp.com/allCotegory')
 		.then(res => res.json())
 		.then(data => setCategory(data))
 		return ()=>{}
@@ -25,23 +25,12 @@ const Product = () => {
 
 	const handlyAddProduct = e => {
 		e.preventDefault()
-		const {toifa,tovar,narx,yuklama,razmer,kafolat,sigim,aksiya,info} = e.target.elements
-		// const {rasm} = e.target.files;
-		const rasm = document.querySelector('.add-product-input').files;
-		console.log(rasm);
-		const data = new FormData();
-
-		data.append('files',rasm);
-		
-
-		
-
-		fetch('http://localhost:5000/newProduct', {
+		const {toifa,tovar,narx,yuklama,razmer,kafolat,sigim,aksiya,info,image} = e.target.elements
+		fetch('https://matrasback.herokuapp.com/newProduct', {
 			method:'POST',
 			headers:{
 				'Content-Type': 'application/json',
 			 },
-			 files:rasm.value,
 			 body:JSON.stringify({
 				productName:tovar.value,
 				productPrice:narx.value,
@@ -52,6 +41,7 @@ const Product = () => {
 				productPriceAksiya:aksiya.value,
 				productText:info.value,
 				cotegoryId:toifa.value,
+				image:image.value
 			 })
 		})
 		.then(res => res.json())
@@ -59,7 +49,7 @@ const Product = () => {
 	}
 	const handlyChange =e => {
 
-		fetch('http://localhost:5000/udateActiveProduct',{
+		fetch('https://matrasback.herokuapp.com/udateActiveProduct',{
 			method:"PUT",
 			headers:{
 				'Content-Type': 'application/json'
@@ -122,7 +112,7 @@ const Product = () => {
 					 <div className="add-product-one">
 						 <label className="add-product-label">
 							 <img src={Vector} alt="sa" className='add-product-img' width={54}/>
-							 <input name='rasm'   type="file" className="add-product-input" multiple/>
+							 <input name='image'   type="file" className="add-product-input" multiple/>
 						 </label>
 					 </div>
 					 <div className="add-product-two">

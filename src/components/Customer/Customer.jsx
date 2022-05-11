@@ -9,13 +9,13 @@ const Customer = () => {
 	const closeModal = () => setShow(false);
     const [customer,setCustomer] = useState([])
 	useEffect(() => {
-		fetch('http://localhost:5000/customer')
+		fetch('https://matrasback.herokuapp.com/customer')
 		.then(res => res.json())
 		.then(data => setCustomer(data))
 	})
 	const handlyChange =e => {
 
-		fetch('http://localhost:5000/updateCustomer',{
+		fetch('https://matrasback.herokuapp.com/updateCustomer',{
 			method:"PUT",
 			headers:{
 				'Content-Type': 'application/json'

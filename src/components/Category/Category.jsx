@@ -8,7 +8,7 @@ const Category = () => {
 	const openModal = () => setShow(true);
 	const closeModal = () => setShow(false);
   useEffect(() => {
-    fetch('http://localhost:5000/allCotegory')
+    fetch('https://matrasback.herokuapp.com/allCotegory')
     .then(res => res.json())
     .then(data => setCategory(data))
   },[])
@@ -18,7 +18,7 @@ const Category = () => {
         const {name} = e.target.elements
         // console.log(name.value);
         if(name.value){
-          fetch('http://localhost:5000/newCategories',{
+          fetch('https://matrasback.herokuapp.com/newCategories',{
             method:'POST',
             headers:{
               'Content-Type': 'application/json'

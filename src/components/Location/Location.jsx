@@ -11,7 +11,7 @@ const Location = () => {
 
 	const [location,setLocation] = useState([])
 	useEffect(() => {
-      fetch('http://localhost:5000/address')
+      fetch('https://matrasback.herokuapp.com/address')
 	  .then(res => res.json())
 	  .then(data => setLocation(data))
 	},[])
@@ -21,7 +21,7 @@ const Location = () => {
 		const {manzil,location,file,info} = e.target.elements
 		console.log(manzil.value,location.value,file.value,info.value);
 		if(manzil.value && location.value && info.value) {
-			fetch('http://localhost:5000/newAddress',{
+			fetch('https://matrasback.herokuapp.com/newAddress',{
 			method:'POST',
 			header:{
 				'Content-Type':'application/json'

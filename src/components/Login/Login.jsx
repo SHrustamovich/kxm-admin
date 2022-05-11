@@ -11,7 +11,7 @@ const Login = () => {
      e.preventDefault()
      const {name,password} = e.target.elements
     //  console.log(name.value,password.value);
-     fetch('http://localhost:5000/login',{
+     fetch('https://matrasback.herokuapp.com/login',{
          method:'POST',
          headers:{
             'Content-Type': 'application/json'

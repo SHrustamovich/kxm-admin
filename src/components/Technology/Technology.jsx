@@ -10,7 +10,7 @@ const Technology = () => {
 	const closeModal = () => setShow(false);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/technologies')
+		fetch('https://matrasback.herokuapp.com/technologies')
 		.then(res => res.json())
 		.then(data => setTech(data))
 		return;
@@ -21,7 +21,7 @@ const Technology = () => {
 		const {name,info,pics} = e.target.elements
 		console.log(name.value,info.value,pics.value);
 		alert('qo`shildi')
-		fetch('http://localhost:5000/newtechnologie',{
+		fetch('https://matrasback.herokuapp.com/newtechnologie',{
 			method:'POST',
 			headers:{
 				'Content-Type': 'application/json'
