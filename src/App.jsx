@@ -14,9 +14,9 @@ function App() {
     <div className="App">
       <Redirect to="/login"/>
       <Switch>
-          <Route path='/login' exact>
+          {/* <Route path='/login' exact>
             <Login/>
-          </Route>
+          </Route> */}
           <Route path={'/main'} exact>
                <Home/>
            </Route>
