@@ -1,79 +1,115 @@
 import './Product.scss'
-import DeleteImg from '../../lib/image/delete.png'
-import EditImg from '../../lib/image/edit.png'
-import Vector from '../../lib/image/Vector.png'
-import SwitchModel from '../Switch/Switch'
+// import DeleteImg from '../../lib/image/delete.png'
+// import EditImg from '../../lib/image/edit.png'
+// import Vector from '../../lib/image/Vector.png'
+// import SwitchModel from '../Switch/Switch'
+import {storage} from '../../lib/Firebase/Firebase'
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { useEffect, useState } from 'react'
-const Product = () => {
+import axios from 'axios';
+const Birthday = () => {
 	const [show, setShow] = useState(false);
 	const [products,setProducts] = useState([])
-	const [category,setCategory] = useState([])
+	// const [category,setCategory] = useState([])
+	const [urlBirthday,setUrlBirthday] = useState("")
+	const [progress,setProgress] = useState(0)
 	const openModal = () => setShow(true);
 	const closeModal = () => setShow(false);
 	useEffect(() => {
-		fetch('https://matrasback.herokuapp.com/product')
+		fetch('http://localhost:9000/allbirthday')
 		.then(res => res.json())
 		.then(data => setProducts(data))
 		return ()=>{}
 	},[])
-	useEffect(() => {
-		fetch('https://matrasback.herokuapp.com/allCotegory')
-		.then(res => res.json())
-		.then(data => setCategory(data))
-		return ()=>{}
-	},[])
-
-	const handlyAddProduct = e => {
+	const handlyAddBirthday = e => {
 		e.preventDefault()
-		const {toifa,tovar,narx,yuklama,razmer,kafolat,sigim,aksiya,info,image} = e.target.elements
-		fetch('https://matrasback.herokuapp.com/newProduct', {
-			method:'POST',
-			headers:{
-				'Content-Type': 'application/json',
-			 },
-			 body:JSON.stringify({
-				productName:tovar.value,
-				productPrice:narx.value,
-				productWight:yuklama.value,
-				productSize:razmer.value,
-				productWarranty:kafolat.value,
-				productSuitable:sigim.value,
-				productPriceAksiya:aksiya.value,
-				productText:info.value,
-				cotegoryId:toifa.value,
-				image:image.value
-			 })
+		const {lavozim,name,tabrik} = e.target.elements
+	 
+		axios({
+			method: "post",
+			url: 'http://localhost:9000/createbirthday',
+			timeout: 1000 * 5, // Wait for 5 seconds
+			headers: {
+			  "Content-Type": "application/json"
+			},
+			data: {
+				birthday_name:lavozim.value,
+				birthday_congrtulation:tabrik.value,
+				birthday_who:name.value,
+				birthday_pics:urlBirthday
+			}
+		  })
+		.then(res => {
+			alert('Create birthday')
 		})
-		.then(res => res.json())
-		.then(data => console.log(data))
+		.catch(error => {
+            console.log(error);
+        });
+		lavozim.value = []
+		tabrik.value = []
+		name.value = []
 	}
 	const handlyChange =e => {
 
-		fetch('https://matrasback.herokuapp.com/udateActiveProduct',{
+		fetch('http://localhost:9000/udelete',{
 			method:"PUT",
 			headers:{
 				'Content-Type': 'application/json'
 			 },
 			 body:JSON.stringify({
-				 id:e.target.name
+				birthday_id:e.target.name
 			 })
 		})
 		.then(res => res.json())
 		.then(data => console.log(data))
 		
 	 }
+
+	 const uploadFiles = (file) => {
+		//
+		if (!file) return;
+		const sotrageRef = ref(storage, `files/${file.name}`);
+		const uploadTask = uploadBytesResumable(sotrageRef, file);
+	
+		uploadTask.on(
+		  "state_changed",
+		  (snapshot) => {
+			const prog = Math.round(
+			  (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+			);
+			setProgress(prog);
+		  },
+		  (error) => console.log(error),
+		  () => {
+			getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+			  setUrlBirthday(downloadURL)
+			//   console.log(downloadURL);
+			});
+		  }
+		);
+	  };
+
+	  const handlyCh = e => {
+		// e.preventDefault()
+		// this.stopPropagation();
+		const file = e.target.files[0]
+		uploadFiles(file);
+		// console.log(file);
+  
+	  }
     return(
         <div className="product">
          <div className="container">
         <table className="table">
 	<thead>
 		<tr>
-			<th>Maxsulot nomlari</th>	
-			<th>Toifalar</th>
-			<th>Narxi</th>
-			<th>Yuklama</th>
-			<th>Razmeri</th>
-			<th>Status</th>  
+			<th>ID</th>  
+			<th>Lavozim</th>	
+			<th>Tabrik</th>
+			<th>Ismi</th>
+			<th>Rasm</th>
+			<th>Sana</th>
+			<th></th>
 			<th></th>
 		</tr>
 	</thead>
@@ -81,20 +117,20 @@ const Product = () => {
 	{
 		products && products.map((e,i) => (
 			<tr key={i}>
-			<td>{e.product_name}</td>
-			<td>{e.cotegory_id}</td>
-			<td>{e.product_price}</td>
-			<td>{e.product_weight}</td>
-			<td>{e.product_sice}</td>
+			<td>{e.birthday_id}</td>
+			<td>{e.birthday_name}</td>
+			<td>{e.birthday_congrtulation}</td>
+			<td>{e.birthday_who}</td>
+			<td><img src={e.birthday_pics} alt="birthday" width={170} /></td>
+			<td>{e.birthday_at}</td>
 			<td>
 			<div className="form-switch">
-                <input name={e.product_id}  className="form-check-input" defaultChecked={e.is_active}  type="checkbox" role="switch" onClick={handlyChange} />
+                <input name={e.birthday_id}  className="form-check-input" defaultChecked={e.is_deleted}  type="checkbox" role="switch" onClick={handlyChange} />
                    </div>
             </td>
 			<td>
                <div>
-                    <button className='edit-btn'><img src={EditImg} alt="edit" /></button>
-                    <button className='delete-btn'><img src={DeleteImg} alt="delete" /></button>
+                    <button className='edit-btn'>Edit</button>
                 </div>
                 </td>
 		</tr>
@@ -104,60 +140,36 @@ const Product = () => {
 </table>
         </div>
         {!show && <button className="add-btn"  onClick={openModal}><i className="add-name">Qo'shish</i></button>}
-	     <form  className={show ? "add-product" : "hide"} onSubmit={handlyAddProduct} encType="multipart/form-data">
-			 <div className="add-product-content">
-				 <span className="add-product-close" onClick={closeModal}>&times;</span>
-				 <p className="add-product-title">Qo'shish</p>
-				 <div className="add-product-column">
-					 <div className="add-product-one">
-						 <label className="add-product-label">
-							 <img src={Vector} alt="sa" className='add-product-img' width={54}/>
-							 <input name='image'   type="file" className="add-product-input" multiple/>
-						 </label>
-					 </div>
-					 <div className="add-product-two">
-						  <label className="add-label">Toifalar</label>
-						  <select name='toifa'>
-                        {
-							category && category.map((e,i) => (
-									<option key={i} value={e.cotegory_id}>{e.cotegory}</option>
-									))
-								}                   
-								</select>
-						  <label className="add-label">Tovar nomi</label>
-                          <input name='tovar' type="text" className="add-input" placeholder='masalan: Lux Soft Memory'/>                        
-						  <label className="add-label">Narxi</label>
-                          <input name='narx' type="text" className="add-input" placeholder='masalan: 20 000'/>                        
-						  <label className="add-label">Yuklama</label>
-                          <input name='yuklama' type="text" className="add-input" placeholder='masalan: 200 kg'/>                        
-					 </div>
-					 <div className="add-product-three">
-					      <label className="add-label">Razmeri</label>
-                          <input name='razmer' type="text" className="add-input" placeholder='masalan: 200 x 140 x 40'/>                        
-						  <label className="add-label">Kafolat</label>
-                          <input name='kafolat' type="text" className="add-input" placeholder='masalan: 1 yil'/>                        
-						  <label className="add-label">Sig'm</label>
-                          <input name='sigim' type="text" className="add-input" placeholder='masalan: 2'/>  
-						  <label className="add-label">Aksiya Narxi</label>
-                          <input name='aksiya' type="text" className="add-input" placeholder='masalan: 1 200 000'/>  
-					 </div>
-					 <div className="add-product-four">
-						  <label className="add-label">Aksiya Narxi</label>
-                          <textarea name="info" className="add-area" placeholder='info...'></textarea>
-						   <div className="add-product-switch">
-							   <div className="add-product-switch-name">Navinla</div>
-							    <div className="add-s"><SwitchModel/></div>
-						   </div>
-						   <div className="add-product-switch">
-							   <div className="add-product-switch-name">Active  </div>
-							   <div className="add-s"><SwitchModel/></div>
-						   </div>
-						   <button className="add-tech-btn"><i className="add-name">Qo'shish</i></button>
-					 </div>
-				 </div>
-			 </div>
+	     <form  className={show ? "add-bir" : "hide"} onSubmit={handlyAddBirthday} encType="multipart/form-data">
+			 <div className="add-bir-content">
+				 <span className="add-bir-close" onClick={closeModal}>&times;</span>
+				 <p className="add-bir-title">Qo'shish(Birthday)</p>
+			     <div className="add-modal-all">
+             <div className='add-modal-left'>
+              <label className='add-modal-label'>Lavozim</label>
+              <input name='lavozim' type="text" className="add-modal-input" placeholder='Lavozim'/>
+              <label className='add-modal-label'>Ism Familya</label>
+               <textarea name="name" cols="50" rows="7" className='add-modal-short'></textarea>
+              <label className='add-modal-label'>Xodim rasmi</label>
+              <input name='image' type="file" className="add-modal-img" onChange={handlyCh}/>
+			  <h2>{progress}%</h2>
+              {/* <form  onSubmit={handlyChangee}>
+              <button className="add-modal-img-btn" type='submit'><img src={Check} alt="" className="img" width={20}/></button>
+              </form> */}
+              {/* <h2 className="uploade">{progress}%</h2> */}
+              </div>
+              <div className="add-modal-right">
+              <label className='add-modal-label'>Tabrik</label>
+               <textarea name="tabrik" cols="40" rows="13" className='add-modal-more'></textarea>
+                
+            <button type='submit' className="add-modal-btn"><span className="btn-name">Qo'shish</span></button>
+              </div>
+             </div>
+				   {/* <input type="text" className="add-bir-input" /> */}
+						   {/* <button className="add-tech-btn"><i className="add-name">Qo'shish</i></button> */}
+			  </div>
 		 </form>
         </div>
     )
 }
-export default Product;
+export default Birthday;

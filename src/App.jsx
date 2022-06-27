@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom';
 import './App.scss';
 import Login from './components/Login/Login';
 import CategoryPage from './pages/Category/Category';
-import CustomerPage from './pages/Customers/Customer';
+// import CustomerPage from './pages/Customers/Customer';
 import Home from './pages/Home/Home';
 import LocationPage from './pages/Location/Location';
 import ProductPage from './pages/Product/Product';
@@ -20,9 +20,6 @@ function App() {
           <Route path={'/main'} exact>
                <Home/>
            </Route>
-          <Route path={'/customer'} exact>
-            <CustomerPage/>
-          </Route>
           <Route path={'/category'} exact>
             <CategoryPage/>
           </Route>

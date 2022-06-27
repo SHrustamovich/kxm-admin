@@ -1,7 +1,7 @@
 // import { Router } from 'express';
 import Header from '../../components/Header/Header';
 import MenuBar from '../../components/MenuBar/MenuBar';
-import Product from '../../components/Products/Product';
+import Birthday from '../../components/Products/Product';
 
 import '../Home/Home.scss'
 const ProductPage= () => {
@@ -13,7 +13,7 @@ const ProductPage= () => {
             <div className="home-header">
                 <Header/>
                 <div className="header-body">
-                            <Product/>
+                            <Birthday/>
                 </div>
             </div>
         </div>

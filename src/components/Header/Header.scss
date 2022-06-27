@@ -9,6 +9,16 @@
         padding: 18px;
         display: flex;
         list-style-type: none;
+        &-item-pics{
+            position: absolute;
+            top: 17px;
+            right: 230px;
+        }
+        &-item-name{
+            position: absolute;
+            top: 20px;
+            right: 130px;
+        }
     }
     &-input{
         width: 400px;
