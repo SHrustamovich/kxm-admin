@@ -11,7 +11,7 @@ const Login = () => {
      e.preventDefault()
      const {name,password} = e.target.elements
     //  console.log(name.value,password.value);
-     fetch('https://matrasback.herokuapp.com/login',{
+     fetch('http://localhost:9000/admin',{
          method:'POST',
          headers:{
             'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ const Login = () => {
              }
          }
          )
-         .catch(err => console.log(err))
+         .catch(err => alert('name or password not true'))
  }
     return(
        <>
