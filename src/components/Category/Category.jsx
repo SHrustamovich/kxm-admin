@@ -14,7 +14,7 @@ const Category = () => {
 	const closeModal = () => setShow(false);
   // console.log(url.value);
   useEffect(() => {
-    fetch('http://localhost:9000/courses')
+    fetch('https://kxmserver.herokuapp.com/courses')
     .then(res => res.json())
     .then(data => setCategory(data))
   },[])
@@ -45,7 +45,7 @@ const Category = () => {
 
         axios({
           method: "post",
-          url: 'http://localhost:9000/createcourse',
+          url: 'https://kxmserver.herokuapp.com/createcourse',
           timeout: 1000 * 5, // Wait for 5 seconds
           headers: {
             "Content-Type": "application/json"
@@ -104,7 +104,7 @@ const Category = () => {
     const handlyChange = e => {
       // e.preventDefault()
       // console.log('ok');
-      fetch('http://localhost:9000/changecourse',{
+      fetch('https://kxmserver.herokuapp.com/changecourse',{
         method:"PUT",
         headers:{
           'Content-Type': 'application/json'

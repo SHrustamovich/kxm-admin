@@ -15,7 +15,7 @@ const Technology = () => {
 	const closeModal = () => setShow(false);
 
 	useEffect(() => {
-		fetch('http://localhost:9000/allnews')
+		fetch('https://kxmserver.herokuapp.com/allnews')
 		.then(res => res.json())
 		.then(data => setTech(data))
 		return;
@@ -26,7 +26,7 @@ const Technology = () => {
 		const {name,nametext} = e.target.elements
 		axios({
 			method: "post",
-			url: 'http://localhost:9000/news',
+			url: 'https://kxmserver.herokuapp.com/news',
 			timeout: 1000 * 5, // Wait for 5 seconds
 			headers: {
 			  "Content-Type": "application/json"
@@ -78,7 +78,7 @@ const Technology = () => {
 
 	const handlyChange = e => {
 		// e.preventDefault()
-        fetch('http://localhost:9000/changedel',{
+        fetch('https://kxmserver.herokuapp.com/changedel',{
 			method:"PUT",
 			headers:{
 				'Content-Type': 'application/json'

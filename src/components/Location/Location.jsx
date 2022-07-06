@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const Location = () => {
 	const [location,setLocation] = useState([])
 	useEffect(() => {
-      fetch('http://localhost:9000/network')
+      fetch('https://kxmserver.herokuapp.com/network')
 	  .then(res => res.json())
 	  .then(data => setLocation(data))
 	},[])

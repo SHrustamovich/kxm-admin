@@ -16,7 +16,7 @@ const Birthday = () => {
 	const openModal = () => setShow(true);
 	const closeModal = () => setShow(false);
 	useEffect(() => {
-		fetch('http://localhost:9000/allbirthday')
+		fetch('https://kxmserver.herokuapp.com/allbirthday')
 		.then(res => res.json())
 		.then(data => setProducts(data))
 		return ()=>{}
@@ -27,7 +27,7 @@ const Birthday = () => {
 	 
 		axios({
 			method: "post",
-			url: 'http://localhost:9000/createbirthday',
+			url: 'https://kxmserver.herokuapp.com/createbirthday',
 			timeout: 1000 * 5, // Wait for 5 seconds
 			headers: {
 			  "Content-Type": "application/json"
@@ -51,7 +51,7 @@ const Birthday = () => {
 	}
 	const handlyChange =e => {
 
-		fetch('http://localhost:9000/udelete',{
+		fetch('https://kxmserver.herokuapp.com/udelete',{
 			method:"PUT",
 			headers:{
 				'Content-Type': 'application/json'

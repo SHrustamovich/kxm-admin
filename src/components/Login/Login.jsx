@@ -11,7 +11,7 @@ const Login = () => {
      e.preventDefault()
      const {name,password} = e.target.elements
     //  console.log(name.value,password.value);
-     fetch('http://localhost:9000/admin',{
+     fetch('https://kxmserver.herokuapp.com/admin',{
          method:'POST',
          headers:{
             'Content-Type': 'application/json'
